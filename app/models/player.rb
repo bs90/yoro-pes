@@ -4,6 +4,7 @@ class Player < ActiveRecord::Base
         DRAWN: 0,
         LOST: -1
     }
+    GROUP_DIVIDE = [0,2,5,9]
 
     has_many :host_games, class_name: "Game", foreign_key: "player1id"
     has_many :guest_games, class_name: "Game", foreign_key: "player2id"
