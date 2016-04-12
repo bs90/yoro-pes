@@ -11,7 +11,7 @@
       <% @games.each do |game| %>
         <tr>
           <td style="vertical-align: middle; font-size: 15px;text-align: right;"><%= game.player1belo %>→<%= game.player1aelo %><%= image_tag game.player1.image_url, class: "logo" %><%= image_tag game.team1.logo, class: "logo" %></td>
-          <td style="vertical-align: middle; font-size: 15px;text-align: center;"><b style="font-size:30px;"><%=game.result_in_text %></b><br><%= game.game_type %><br><%= game.tournament.name %></td>
+          <td style="vertical-align: middle; font-size: 15px;text-align: center;"><b style="font-size:30px;"><%=game.result_in_text %></b><br><%= game.game_type %><%= game.created_at.strftime("%d/%m/%Y") if game.tournament.id==1 %><br><%= game.tournament.name %></td>
           <td style="vertical-align: middle; font-size: 15px;text-align: left;"><%= image_tag game.team2.logo, class: "logo" %><%= image_tag game.player2.image_url, class: "logo" %><%= game.player2belo %>→<%= game.player2aelo %></td>
         </tr>
       <% end %>
@@ -29,6 +29,11 @@
 </style>
 
 <script>
+$(function(){
+  setTimeout(function(){
+    $("#by_games").hide(300);
+  }, 1000);
+});
 $("#by_events").click(function(){
   $("#by_events").hide(300);
   $("#by_games").show(300);
