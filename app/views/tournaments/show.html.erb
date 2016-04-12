@@ -26,7 +26,7 @@
     <% @games.each do |game| %>
       <tr class=<%= game.created_at.strftime("%d%m%Y")%>>
         <td style="vertical-align: middle; font-size: 15px;text-align: right;"><%= game.player1belo %>→<%= game.player1aelo %><%= link_to image_tag(game.player1.image_url, class: "logo"), player_path(game.player1) %><%= image_tag game.team1.logo, class: "logo" %></td>
-        <td style="vertical-align: middle; font-size: 15px;text-align: center;"><b style="font-size:30px;"><%=game.result_in_text %></b><br><%= game.game_type %><%= game.created_at.strftime("%Y/%m/%d") if @tournament.id==1 %></td>
+        <td style="vertical-align: middle; font-size: 15px;text-align: center;"><b style="font-size:30px;"><%=game.result_in_text %></b><br><%= game.game_type %><a style="cursor: pointer;" onclick="showMatches('<%= game.created_at.strftime("%d/%m/%Y")%>')"><%= game.created_at.strftime("%d/%m/%Y") if @tournament.id==1 %></a></td>
         <td style="vertical-align: middle; font-size: 15px;text-align: left;"><%= image_tag game.team2.logo, class: "logo" %><%= link_to image_tag(game.player2.image_url, class: "logo"), player_path(game.player2) %><%= game.player2belo %>→<%= game.player2aelo %></td>
       </tr>
     <% end %>
@@ -58,9 +58,7 @@
       dateFormat: "dd/mm/yy"
     })
     .on("input change", function(e) {
-      var date_str = "." + e.target.value.replace(/\//g, "");
-      $(".games").children("tr").hide();
-      $(date_str).show();
+      showMatches(e.target.value);
     });
   });
 
@@ -68,4 +66,11 @@
     $("#datepicker").datepicker("setDate", null);
     $(".games").children("tr").show();
   })
+
+  function showMatches(date){
+    $("#datepicker").val(date);
+    var date_str = "." + date.replace(/\//g, "");
+    $(".games").children("tr").hide();
+    $(date_str).show();
+  }
 </script>

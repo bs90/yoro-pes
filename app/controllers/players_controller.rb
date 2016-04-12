@@ -17,7 +17,7 @@ class PlayersController < ApplicationController
   # GET /players/1
   # GET /players/1.json
   def show
-    @games = @player.games.sort_by(&:id)
+    @games = @player.games.sort_by(&:id).reverse
     @games_data = []
     @games.each_with_index do |g, i|
       @games_data << if g.player1id == @player.id
