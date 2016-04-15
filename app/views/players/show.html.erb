@@ -8,7 +8,7 @@
   <%= line_chart @games_data, min: @min, max: @max, discrete: true, library: {curveType: 'none', title: "ELO by matches"}, id: "by_games" %>
   <table class="table table-striped" style="text-align: center">
     <tbody>
-      <% @games.each do |game| %>
+      <% @games.reverse.each do |game| %>
         <tr>
           <td style="vertical-align: middle; font-size: 15px;text-align: right;"><%= game.player1belo %>→<%= game.player1aelo %><%= image_tag game.player1.image_url, class: "logo" %><%= image_tag game.team1.logo, class: "logo" %></td>
           <td style="vertical-align: middle; font-size: 15px;text-align: center;"><b style="font-size:30px;"><%=game.result_in_text %></b><br><%= game.game_type %><%= game.created_at.strftime("%d/%m/%Y") if game.tournament.id==1 %><br><%= game.tournament.name %></td>
