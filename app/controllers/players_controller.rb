@@ -7,8 +7,8 @@ class PlayersController < ApplicationController
   def index
     @players = Player.order(elo: :desc).to_a
     @group1 = @players.first(3)
-    @group2 = @players.first(6) - @group1 = @players.first(3)
-    @group3 = @players.last(4)
+    @group2 = @players.first(6) - @group1
+    @group3 = @players - @group1 - @group2
     @all_elo = Event.all.inject([]){|s,e| s|=eval(e.elos).values}
     @min = @all_elo.min - 20
     @max = @all_elo.max + 20
@@ -18,20 +18,22 @@ class PlayersController < ApplicationController
   # GET /players/1.json
   def show
     @games = @player.games.sort_by(&:id)
-    @games_data = []
-    @games.each_with_index do |g, i|
-      @games_data << if g.player1id == @player.id
-        [i+1, g.player1aelo]
-      else
-        [i+1, g.player2aelo]
+    if @games.count != 0
+      @games_data = []
+      @games.each_with_index do |g, i|
+        @games_data << if g.player1id == @player.id
+          [i+1, g.player1aelo]
+        else
+          [i+1, g.player2aelo]
+        end
       end
+      @events_data = []
+      Event.all.sort_by(&:id).each do |e|
+        @events_data << [e.name, eval(e.elos)[@player.id]]
+      end
+      @min = @games_data.map(&:last).min - 20
+      @max = @games_data.map(&:last).max + 20
     end
-    @events_data = []
-    Event.all.sort_by(&:id).each do |e|
-      @events_data << [e.name, eval(e.elos)[@player.id]]
-    end
-    @min = @games_data.map(&:last).min - 20
-    @max = @games_data.map(&:last).max + 20
   end
 
   # GET /players/new

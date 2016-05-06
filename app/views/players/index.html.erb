@@ -1,7 +1,7 @@
 <%= javascript_include_tag "//www.google.com/jsapi", "chartkick" %>
 <%= line_chart Player.all.sort_by(&:id).map { |player|
     {name: player.name, data: player.elo_data_by_event}
-}, width: "90%",min: @min, max: @max, discrete: true, library: {legend: { position: 'right', alignment: 'center'}, curveType: 'none'} %>
+}, width: "90%", height: "350px",min: @min, max: @max, discrete: true, library: {legend: { position: 'right', alignment: 'center'}, curveType: 'none'} %>
 <center><h3 style="color:#ea6153;padding:10px;font-weight:bold;">GROUP 1</h3></center>
 <table class="table table-striped" style="text-align: center;border: 1px rgb(237, 237, 237) solid">
   <thead>
