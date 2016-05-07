@@ -7,7 +7,7 @@
 <h4>URL:<%= link_to @tournament.url, @tournament.url, target: "_blank" %></h4>
 <% if @tournament.firstplace %>
 <hr>
-<center><h4>1st (+80 ELO) <%= image_tag @tournament.firstplace.image_url, class: "logo margin-image" %>2st (+40 ELO) <%= image_tag @tournament.secondplace.image_url, class: "logo margin-image" %>3st (+20 ELO) <%= image_tag @tournament.thirdplace.image_url, class: "logo margin-image" %></h4></center>
+<center><h4>1st (+100 ELO) <%= image_tag @tournament.firstplace.image_url, class: "logo margin-image" %>2st (+60 ELO) <%= image_tag @tournament.secondplace.image_url, class: "logo margin-image" %>3st (+40 ELO) <%= image_tag @tournament.thirdplace.image_url, class: "logo margin-image" %></h4></center>
 <%  else %>
 <%= link_to 'Edit', edit_tournament_path(@tournament), class: "btn btn-success" %>
 <%= link_to 'Submit a match', new_game_path(tournament_id: @tournament.id), class: "btn btn-success" %>
