@@ -7,8 +7,7 @@ class Game < ActiveRecord::Base
     belongs_to :tournament
     after_create :set_belo_and_aelo_and_result
     
-    TEAMS = {"bayern"=>1, "real"=>2, "barca"=>3, "psg"=>4, "manc"=>5, "chelsea"=>6, "juve"=>7, "arsenal"=>8, "dortmund"=>9, "manu"=>10, "atletico"=>11, "roma"=>12, "everton"=>13, "liverpool"=>14, "milan"=>15, "inter"=>16, "napoli"=>17, "lazio"=>18, "spurs"=>19}
-    
+    TEAMS = {"bayern"=>1, "real"=>2, "barca"=>3, "psg"=>4, "manc"=>5, "chelsea"=>6, "juve"=>7, "arsenal"=>8, "dortmund"=>9, "manu"=>10, "atletico"=>11, "roma"=>12, "everton"=>13, "liverpool"=>14, "milan"=>15, "inter"=>16, "napoli"=>17, "lazio"=>18, "spurs"=>19, "argentina"=>20, "brazil"=>21, "colombia"=>22, "uruguay"=>23, "chile"=>24, "spain"=>25, "belgium"=>26, "switzerland"=>27, "germany"=>28, "england"=>29, "france"=>30, "croatia"=>31, "italy"=>32, "netherlands"=>33, "portugal"=>34, "sweden"=>35, "wales"=>36, "japan"=>37, "russia"=>38, "poland"=>39, "porto"=>40} 
     class << self
       def batch_create! tournament_id, filepath
         CSV.foreach(filepath) do |row|
